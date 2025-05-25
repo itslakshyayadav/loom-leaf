@@ -1,15 +1,14 @@
+
 import { useAuth } from "@/context/AuthContext";
+import { useAuthForm } from "@/context/AuthFormContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import BaseInput from "@/component/inputs";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
+  const { email, setEmail, password, setPassword, error, setError, loading, setLoading } = useAuthForm()!;
   const { signInUser } = useAuth() ?? {};
-
   const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -24,7 +23,7 @@ export default function Login() {
       return;
     }
     if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
+      setError("Please use correct Password.");
       return;
     }
 
@@ -35,9 +34,8 @@ export default function Login() {
     setLoading(true);
     try {
       const result = await signInUser({ email: trimmedEmail, password });
-      console.log("result", result);
       if (result.success) {
-        navigate("/");
+        navigate("/home");
       } else if (result.error?.message) {
         setError(result.error.message);
       }
@@ -49,50 +47,52 @@ export default function Login() {
     }
   };
 
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center flex-col justify-center ">
+      <p className="text-white text-3xl">Welcome to Loom & Leaf</p>
       <form
         onSubmit={handleSignIn}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="p-8 rounded w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">Login</h2>
         <div className="mb-4">
-          <label className="block mb-1 font-medium" htmlFor="email">
-            Email
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
-            type="email"
+          <BaseInput
+            label="Email"
             id="email"
             name="email"
+            type="email"
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
+            className=""
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-1 font-medium" htmlFor="password">
-            Password
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
-            type="password"
+          <BaseInput
+            label="Password"
             id="password"
             name="password"
+            type="password"
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
+            className=""
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full text-black bg-white py-2 rounded font-medium transition"
         >
           Sign In
         </button>
         {error && (
-          <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
+          <p className="mt-4 text-red-500 text-sm text-center">
+            {error}
+          </p>
         )}
-        <p className="mt-4 text-center text-sm">
+        <p className="mt-4 text-center text-white text-sm">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-600 hover:underline">
+          <Link to="/signup" className="text-lime-500 font-medium hover:underline">
             Signup
           </Link>
         </p>

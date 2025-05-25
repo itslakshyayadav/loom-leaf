@@ -1,17 +1,16 @@
+import BaseInput from "@/component/inputs";
 import { useAuth } from "@/context/AuthContext";
+import { useAuthForm } from "@/context/AuthFormContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const { email, setEmail, password, setPassword, error, setError, loading, setLoading } = useAuthForm()!;
 
-  const { session, SignUpNewUser } = useAuth() ?? {};
+  const { SignUpNewUser } = useAuth() ?? {};
 
   const navigate = useNavigate();
-  console.log("session", session);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +24,7 @@ export default function SignUp() {
       return;
     }
     if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
+      setError("Please enter valid password.");
       return;
     }
 
@@ -35,7 +34,7 @@ export default function SignUp() {
     }
     setLoading(true);
     try {
-      const result = await SignUpNewUser({ email: trimmedEmail, password });
+      const result = await SignUpNewUser({ email: trimmedEmail, password, name });
       if (result.success) {
         navigate("/login");
       } else if (result.error?.message) {
@@ -50,49 +49,59 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center flex-col">
+      <p className="text-white text-3xl">Welcome to Loom & Leaf</p>
       <form
         onSubmit={handleSignUp}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
+        className="p-8 w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">Sign Up</h2>
         <div className="mb-4">
-          <label className="block mb-1 font-medium" htmlFor="email">
-            Email
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
-            type="email"
+          <BaseInput
+            label="Name"
+            id="name"
+            name="name"
+            type="text"
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            className=""
+          />
+        </div>
+        <div className="mb-4">
+          <BaseInput
+            label="Email"
             id="email"
             name="email"
+            type="email"
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            className=""
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-1 font-medium" htmlFor="password">
-            Password
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
-            type="password"
+          <BaseInput
+            label="Password"
             id="password"
             name="password"
+            type="password"
+            value={password}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            className=""
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full text-black bg-white py-2 rounded font-medium transition"
         >
           Sign Up
         </button>
         {error && (
           <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}
-        <p className="mt-4 text-center text-sm">
+        <p className="mt-4 text-center text-white text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-lime-500 font-medium hover:underline">
             Login
           </Link>
         </p>
