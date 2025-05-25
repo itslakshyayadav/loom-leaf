@@ -1,4 +1,4 @@
-import BaseNavbar from "@/components/BaseNavbar";
+import BaseNavbar from "@/component/BaseNavbar";
 
 function App() {
   // const [count, setCount] = useState(0)

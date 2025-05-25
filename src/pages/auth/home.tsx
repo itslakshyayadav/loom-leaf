@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div>new home</div>
-  )
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100"></div>
+  );
 }
