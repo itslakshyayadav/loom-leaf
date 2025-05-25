@@ -1,19 +1,16 @@
-
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { session, signInUser } = useAuth() ?? {};
+  const { signInUser } = useAuth() ?? {};
 
   const navigate = useNavigate();
-  console.log("session", session);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,8 +35,9 @@ export default function Login() {
     setLoading(true);
     try {
       const result = await signInUser({ email: trimmedEmail, password });
+      console.log("result", result);
       if (result.success) {
-        navigate("/home");
+        navigate("/");
       } else if (result.error?.message) {
         setError(result.error.message);
       }
@@ -50,7 +48,6 @@ export default function Login() {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -70,7 +67,6 @@ export default function Login() {
             id="email"
             name="email"
           />
-
         </div>
         <div className="mb-6">
           <label className="block mb-1 font-medium" htmlFor="password">
@@ -92,9 +88,7 @@ export default function Login() {
           Sign In
         </button>
         {error && (
-          <p className="mt-4 text-red-500 text-sm text-center">
-            {error}
-          </p>
+          <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}
         <p className="mt-4 text-center text-sm">
           Don't have an account?{" "}

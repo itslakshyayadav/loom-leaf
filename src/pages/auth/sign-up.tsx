@@ -1,10 +1,8 @@
-
 import { useAuth } from "@/context/AuthContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -51,7 +49,6 @@ export default function SignUp() {
     }
   };
 
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
@@ -70,7 +67,6 @@ export default function SignUp() {
             id="email"
             name="email"
           />
-
         </div>
         <div className="mb-6">
           <label className="block mb-1 font-medium" htmlFor="password">
@@ -92,9 +88,7 @@ export default function SignUp() {
           Sign Up
         </button>
         {error && (
-          <p className="mt-4 text-red-500 text-sm text-center">
-            {error}
-          </p>
+          <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}
         <p className="mt-4 text-center text-sm">
           Already have an account?{" "}
