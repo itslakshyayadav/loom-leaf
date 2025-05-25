@@ -1,4 +1,4 @@
-import Modal from "@/component/modal";
+import Modal from "@/components/modal";
 import { supabase } from "@/supabase";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,15 +1,13 @@
-// import { useState } from 'react'
-
+import BaseNavbar from "@/components/BaseNavbar";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>Dashboard</div>
+      <BaseNavbar></BaseNavbar>
     </>
-
-  )
+  );
 }
 
-export default App
+export default App;
