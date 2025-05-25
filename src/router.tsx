@@ -4,10 +4,16 @@ import Login from "@/pages/auth/login";
 import Home from "@/pages/auth/home";
 import SignUp from "@/pages/auth/sign-up";
 import PrivateRoute from "@/component/PrivateRoute";
+import AuthLayout from "@/pages/auth/index";
 
 const publicRoutes = [
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <SignUp /> },
+  {
+    element: <AuthLayout />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <SignUp /> },
+    ],
+  },
 ];
 
 const privateRoutes = [
