@@ -1,13 +1,19 @@
-
 import { useAuth } from "@/context/AuthContext";
 import { useAuthForm } from "@/context/AuthFormContext";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BaseInput from "@/component/inputs";
 
 export default function Login() {
-
-  const { email, setEmail, password, setPassword, error, setError, loading, setLoading } = useAuthForm()!;
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    setError,
+    loading,
+    setLoading,
+  } = useAuthForm()!;
   const { signInUser } = useAuth() ?? {};
   const navigate = useNavigate();
 
@@ -35,7 +41,7 @@ export default function Login() {
     try {
       const result = await signInUser({ email: trimmedEmail, password });
       if (result.success) {
-        navigate("/home");
+        navigate("/");
       } else if (result.error?.message) {
         setError(result.error.message);
       }
@@ -47,15 +53,13 @@ export default function Login() {
     }
   };
 
-
   return (
     <div className="flex items-center flex-col justify-center ">
-      <p className="text-white text-3xl">Welcome to Loom & Leaf</p>
-      <form
-        onSubmit={handleSignIn}
-        className="p-8 rounded w-full max-w-md"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center text-white">Login</h2>
+      <p className="text-gray-200 text-3xl">Welcome to Loom & Leaf</p>
+      <form onSubmit={handleSignIn} className="p-8 rounded w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">
+          Login
+        </h2>
         <div className="mb-4">
           <BaseInput
             label="Email"
@@ -63,7 +67,7 @@ export default function Login() {
             name="email"
             type="email"
             value={email}
-            onChange={(e: any) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className=""
           />
         </div>
@@ -74,7 +78,7 @@ export default function Login() {
             name="password"
             type="password"
             value={password}
-            onChange={(e: any) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             className=""
           />
         </div>
@@ -86,13 +90,14 @@ export default function Login() {
           Sign In
         </button>
         {error && (
-          <p className="mt-4 text-red-500 text-sm text-center">
-            {error}
-          </p>
+          <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}
         <p className="mt-4 text-center text-white text-sm">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-lime-500 font-medium hover:underline">
+          <Link
+            to="/signup"
+            className="text-lime-500 font-medium hover:underline"
+          >
             Signup
           </Link>
         </p>
