@@ -6,7 +6,16 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [name, setName] = useState("");
-  const { email, setEmail, password, setPassword, error, setError, loading, setLoading } = useAuthForm()!;
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    setError,
+    loading,
+    setLoading,
+  } = useAuthForm()!;
 
   const { SignUpNewUser } = useAuth() ?? {};
 
@@ -34,7 +43,11 @@ export default function SignUp() {
     }
     setLoading(true);
     try {
-      const result = await SignUpNewUser({ email: trimmedEmail, password, name });
+      const result = await SignUpNewUser({
+        email: trimmedEmail,
+        password,
+        name,
+      });
       if (result.success) {
         navigate("/login");
       } else if (result.error?.message) {
@@ -50,12 +63,11 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center flex-col">
-      <p className="text-white text-3xl">Welcome to Loom & Leaf</p>
-      <form
-        onSubmit={handleSignUp}
-        className="p-8 w-full max-w-md"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center text-white">Sign Up</h2>
+      <p className="text-gray-200 text-3xl">Welcome to Looms & Leaf</p>
+      <form onSubmit={handleSignUp} className="p-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-white">
+          Sign Up
+        </h2>
         <div className="mb-4">
           <BaseInput
             label="Name"
@@ -63,7 +75,7 @@ export default function SignUp() {
             name="name"
             type="text"
             value={name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             className=""
           />
         </div>
@@ -74,7 +86,7 @@ export default function SignUp() {
             name="email"
             type="email"
             value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className=""
           />
         </div>
@@ -85,7 +97,7 @@ export default function SignUp() {
             name="password"
             type="password"
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             className=""
           />
         </div>
@@ -101,7 +113,10 @@ export default function SignUp() {
         )}
         <p className="mt-4 text-center text-white text-sm">
           Already have an account?{" "}
-          <Link to="/login" className="text-lime-500 font-medium hover:underline">
+          <Link
+            to="/login"
+            className="text-lime-500 font-medium hover:underline"
+          >
             Login
           </Link>
         </p>
