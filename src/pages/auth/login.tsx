@@ -2,6 +2,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useAuthForm } from "@/context/AuthFormContext";
 import { Link, useNavigate } from "react-router-dom";
 import BaseInput from "@/component/inputs";
+import LoaderButton from "@/component/loaders/LoaderButton";
 
 export default function Login() {
   const {
@@ -82,13 +83,14 @@ export default function Login() {
             className=""
           />
         </div>
-        <button
+        {/* <button
           type="submit"
           disabled={loading}
           className="w-full text-black bg-white py-2 rounded font-medium transition"
         >
           Sign In
-        </button>
+        </button> */}
+        <LoaderButton loading={loading}>Login</LoaderButton>
         {error && (
           <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}

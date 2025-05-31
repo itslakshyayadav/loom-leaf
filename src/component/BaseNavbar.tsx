@@ -1,10 +1,11 @@
-import logo from "@/assets/LL.jpg";
+import logo from "@/assets/white-logo.png";
 import { useAuth } from "@/context/AuthContext";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function BaseNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     setIsOpen(true);
@@ -27,14 +28,17 @@ export default function BaseNavbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const { session, signOut } = useAuth() ?? {};
   const navigate = useNavigate();
-  console.log("session signout", session);
-  const handleSignOut = async (e: any) => {
+  console.log("session login", session);
+  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
       if (signOut) {
+        setLoading(true);
         await signOut();
+        setLoading(false);
         navigate("/login");
       } else {
         console.error("signOut function is not available.");
@@ -44,25 +48,25 @@ export default function BaseNavbar() {
       // Optionally, you can show an error message to the user
     }
   };
-  if (!session) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-        <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
-        <p className="text-lg text-gray-700">
-          You must be logged in to view this page.
-        </p>
-        <button
-          onClick={() => navigate("/login")}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Go to Login
-        </button>
-      </div>
-    );
-  }
+  // if (session) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+  //       <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
+  //       <p className="text-lg text-gray-700">
+  //         You must be logged in to view this page.
+  //       </p>
+  //       <button
+  //         onClick={() => navigate("/login")}
+  //         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+  //       >
+  //         Go to Login
+  //       </button>
+  //     </div>
+  //   );
+  // }
   return (
-    <div className="px-4 bg-white border-b " ref={dropdownRef}>
-      <header className="relative bg-white">
+    <div className="px-4 bg-black border-b " ref={dropdownRef}>
+      <header className="relative bg-black">
         <nav className="  ">
           <div className=" border-gray-200">
             <div className="flex h-16 items-center gap-5 justify-between">
@@ -86,34 +90,34 @@ export default function BaseNavbar() {
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <a href="#">
+                <a href="/">
                   <img alt="Logo" src={logo} className="h-16 w-auto" />
                 </a>
               </div>
 
               {/* Desktop navigation links */}
               <div className="hidden lg:flex lg:space-x-8">
-                <a
-                  href="#"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                <Link
+                  to="/home"
+                  className="text-sm font-medium text-gray-200 hover:text-gray-100"
                 >
                   Home
-                </a>
+                </Link>
                 <a
                   href="#"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  className="text-sm font-medium text-gray-200 hover:text-gray-100"
                 >
                   Men
                 </a>
                 <a
                   href="#"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  className="text-sm font-medium text-gray-200 hover:text-gray-100"
                 >
                   Company
                 </a>
                 <a
                   href="#"
-                  className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                  className="text-sm font-medium text-gray-200 hover:text-gray-100"
                 >
                   Stores
                 </a>
@@ -194,9 +198,15 @@ export default function BaseNavbar() {
                       <div>
                         <button
                           onClick={handleSignOut}
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                          disabled={loading}
+                          className={`block px-4 w-full text-left  py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden 
+                          ${
+                            loading
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:bg-gray-100"
+                          }`}
                         >
-                          Sign out
+                          {loading ? "Signing out..." : "Sign out"}
                         </button>
                       </div>
                     </div>

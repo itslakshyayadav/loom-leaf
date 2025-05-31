@@ -1,4 +1,5 @@
 import BaseInput from "@/component/inputs";
+import LoaderButton from "@/component/loaders/LoaderButton";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthForm } from "@/context/AuthFormContext";
 import { useState } from "react";
@@ -66,7 +67,7 @@ export default function SignUp() {
       <p className="text-gray-200 text-3xl">Welcome to Looms & Leaf</p>
       <form onSubmit={handleSignUp} className="p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-white">
-          Sign Up
+          Create your account
         </h2>
         <div className="mb-4">
           <BaseInput
@@ -101,13 +102,7 @@ export default function SignUp() {
             className=""
           />
         </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full text-black bg-white py-2 rounded font-medium transition"
-        >
-          Sign Up
-        </button>
+        <LoaderButton loading={loading}>Create Account</LoaderButton>
         {error && (
           <p className="mt-4 text-red-500 text-sm text-center">{error}</p>
         )}
