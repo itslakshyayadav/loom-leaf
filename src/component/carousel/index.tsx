@@ -46,7 +46,7 @@ const Carousel: React.FC<CarouselProps> = ({
           {items.map((item) => (
             <div
               key={item.id}
-              className="w-full flex-shrink-0 flex justify-center items-center h-[25rem]  bg-transparent"
+              className="w-full flex-shrink-0 flex justify-center items-center h-[23rem]  bg-transparent"
             >
               {item.content}
             </div>
