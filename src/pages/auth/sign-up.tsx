@@ -50,7 +50,7 @@ export default function SignUp() {
         name,
       });
       if (result.success) {
-        navigate("/login");
+        navigate("auth/login");
       } else if (result.error?.message) {
         setError(result.error.message);
       }
@@ -109,7 +109,7 @@ export default function SignUp() {
         <p className="mt-4 text-center text-white text-sm">
           Already have an account?{" "}
           <Link
-            to="/login"
+            to="/auth/login"
             className="text-lime-500 font-medium hover:underline"
           >
             Login
