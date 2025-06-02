@@ -7,6 +7,8 @@ import SignUp from "@/pages/auth/sign-up";
 import AuthLayout from "@/pages/auth/index";
 import MainLayout from "@/pages/MainLayout";
 import ProductList from "@/pages/products/ProductList";
+import MainLayout from "@/pages/MainLayout";
+import ProductList from "@/pages/products/ProductList";
 
 const publicRoutes = [
   {
@@ -18,10 +20,9 @@ const publicRoutes = [
   },
   {
     element: <AuthLayout />,
-
     children: [
-      { path: "/login", element: <Login /> },
-      { path: "/signup", element: <SignUp /> },
+      { path: "auth/login", element: <Login /> },
+      { path: "auth/signup", element: <SignUp /> },
     ],
   },
 ];
@@ -29,33 +30,12 @@ const publicRoutes = [
 const privateRoutes = [
   {
     element: <MainLayout />,
-    children: [],
-  },
-  {
-    path: "/",
-    element: (
-      // <PrivateRoute>
-      <App />
-      // </PrivateRoute>
-    ),
-    childre: [
-      {
-        path: "/home",
-        element: (
-          <Home />
-          // </PrivateRoute>
-        ),
-      },
+    children: [
+      { path: "/", element: <App /> },
+      { path: "/home", element: <Home /> },
+      { path: "/product", element: <ProductList /> },
     ],
   },
-  // {
-  //   path: "/home",
-  //   element: (
-  //     // <PrivateRoute>
-  //     <Home />
-  //     // </PrivateRoute>
-  //   ),
-  // },
 ];
 
 export const router = createBrowserRouter([...privateRoutes, ...publicRoutes]);

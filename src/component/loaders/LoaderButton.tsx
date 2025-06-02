@@ -17,7 +17,7 @@ const LoaderButton: React.FC<LoaderButtonProps> = ({
 
   return (
     <button
-      className={`relative inline-flex items-center justify-center px-4 py-2 w-full bg-white text-black hover:bg-zinc-100 transition-all duration-200 disabled:opacity-100 disabled:cursor-not-allowed ${className}`}
+      className={`relative rounded inline-flex items-center justify-center px-4 py-2 w-full bg-white text-black transition-all duration-200 disabled:opacity-100 disabled:cursor-not-allowed ${className}`}
       disabled={isDisabled}
       {...props}
     >

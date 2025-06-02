@@ -1,5 +1,9 @@
 import { Outlet } from "react-router-dom";
-import BaseNavbar from "@/component/BaseNavbar";
+// import BaseNavbar from "../components/base-components/BottomBaseNavbar";
+
+import BaseNavbar from "@/component/BaseNavbar/index";
+// import BottomBaseNavbar from "@/components/base-components/BottomBaseNavbar";
+
 export default function MainLayout() {
   return (
     <>

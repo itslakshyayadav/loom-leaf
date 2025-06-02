@@ -1,19 +1,19 @@
 interface ProductCardProps {
-  id?: string | number;
+  key?: string | number;
   name?: string;
   price?: number;
-  image?: string;
+  image?: any;
 }
 
 export default function ProductCard({
-  id,
+  key,
   name,
   price,
   image,
 }: ProductCardProps) {
   return (
     <div
-      key={id}
+      key={key}
       className="bg-white rounded-lg shadow-md overflow-hidden w-64"
     >
       <img src={image} alt={name} className="w-full h-48 object-cover" />
