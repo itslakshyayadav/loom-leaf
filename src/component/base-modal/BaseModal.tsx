@@ -1,5 +1,5 @@
 import React from "react";
-import BaseIcon from "../base-icon/BaseIcon";
+import BaseIcon from "@/component/base-icon/index";
 
 interface BaseModalProps {
     isShown: boolean;
@@ -24,7 +24,7 @@ export default function BaseModal({
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-center flex flex-col gap-4">
                                 <div className="flex">
                                     <p className="text-lg font-medium leading-6 text-gray-900 mr-auto w-6">{headerText}</p>
-                                    <BaseIcon iconName="x-mark" className="h-6 w-6 ml-auto" />
+                                    <BaseIcon name="delete" className="h-6 w-6 ml-auto" />
                                 </div>
                                 <p className="text-xl font-medium text-pink-600 text-center">{bodyText}</p>
                             </div>

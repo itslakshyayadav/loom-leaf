@@ -1,11 +1,10 @@
-import BaseNavbar from "@/component/BaseNavbar";
+import ProductList from "./pages/products/ProductList";
 
 function App() {
-  // const [count, setCount] = useState(0)
 
   return (
     <>
-      <BaseNavbar></BaseNavbar>
+      <ProductList />
     </>
   );
 }

@@ -1,5 +1,7 @@
 
 export const ICONS = {
+    delete: "delete",
+    hamburger: "hamburger",
     search: "search",
     copy: "copy",
     Uparrow: "uparrow",
