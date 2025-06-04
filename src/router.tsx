@@ -5,10 +5,10 @@ import Home from "@/pages/auth/home";
 import SignUp from "@/pages/auth/sign-up";
 // import PrivateRoute from "@/component/PrivateRoute";
 import AuthLayout from "@/pages/auth/index";
-import MainLayout from "@/pages/MainLayout";
+// import MainLayout from "@/pages/MainLayout";
 import ProductList from "@/pages/products/ProductList";
 import MainLayout from "@/pages/MainLayout";
-import ProductList from "@/pages/products/ProductList";
+// import ProductList from "@/pages/products/ProductList";
 
 const publicRoutes = [
   {
