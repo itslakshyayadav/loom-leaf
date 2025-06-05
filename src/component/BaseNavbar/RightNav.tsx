@@ -2,10 +2,20 @@ import { useAuth } from "@/context/AuthContext";
 import { Link } from "react-router-dom";
 import BaseIcon from "../base-icon";
 import { ProfileSection } from "./ProfileSection";
+import { useState } from "react";
+import RightSlider from "@/component/base-modal/RightSlider";
+import CartBody from "@/pages/cart/CartBody";
 
-export const RightNav = (props: any) => {
+interface RightNavProps {
+  isOpen: boolean;
+  toggleMenu: () => void;
+}
+
+export const RightNav = (props: RightNavProps) => {
   const { isOpen, toggleMenu } = props;
   const { session } = useAuth() ?? {};
+
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <>
@@ -35,10 +45,18 @@ export const RightNav = (props: any) => {
             className="hidden lg:block m-4 cursor-pointer"
             name="cart"
             color="text-black"
+            onClick={() => setCartOpen(true)}
           />
           <ProfileSection isOpen={isOpen} toggleMenu={toggleMenu} />
         </div>
       )}
+      <RightSlider
+        isOpen={cartOpen}
+        title="Your Cart"
+        onClose={() => setCartOpen(false)}
+      >
+        <CartBody></CartBody>
+      </RightSlider>
     </>
   );
 };

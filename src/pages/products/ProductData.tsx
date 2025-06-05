@@ -2,7 +2,7 @@ export const products = [
   {
     id: 1,
     name: "Classic T-Shirt",
-    title: "Descarga el foto libre de regalías lujo negro camiseta",
+    title: "Descarga el foto libre de regalías lujo",
     price: 499,
     originalPrice: 699,
     image:
@@ -12,7 +12,7 @@ export const products = [
   {
     id: 2,
     name: "Denim Jacket",
-    title: "Simple, sleek, and essential—our Plain Black Unisex",
+    title: "Simple, sleek, and essential—our  Unisex",
     price: 1299,
     originalPrice: 1599,
     image:
